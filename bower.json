@@ -1,0 +1,23 @@
+{
+  "name": "jquery-pjax-toolkit",
+  "version": "0.1.0",
+  "homepage": "https://github.com/eddyystop/jquery-pjax-toolkit",
+  "authors": [
+    "JohnSz <johnsz9999@gmail.com>"
+  ],
+  "description": "A toolkit for jquery-pjax. Useful utilities & a micro framework.",
+  "main": "jquery-pjax-toolkit.js",
+  "keywords": [
+    "pjax",
+    "jquery-pjax",
+    "framework"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
