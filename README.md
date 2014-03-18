@@ -1,9 +1,8 @@
 # [jquery-pjax-toolkit] (https://github.com/defunkt/jquery-pjax-toolkit)
 
-jquery-pjax-toolkit provides additional capabilities for when you are using
-[jquery-pjax] (https://github.com/defunkt/jquery-pjax).
-Related features are packaged in separate files,
-and you may use just the files you need.
+A toolkit for [jquery-pjax] (https://github.com/defunkt/jquery-pjax).
+Useful utilities & a micro framework.
+Related features are packaged in separate files, which you can use as needed.
 
 ## How to install
 ```sh
@@ -19,6 +18,8 @@ bower install git://github.com/eddyystop/jquery-pjax-toolkit
 - [pjax-features] (#pjax-features) - Report features supported by the client.
 - [pjax-responsive-tables] (#pjax-responsive-tables) -
 Support for responsive tables.
+- [pjax-responsive-images] (#pjax-responsive-images) -
+Support for responsive images.
 - [pjax-app] (#pjax-app) - Ties the above into a micro framework
 for jquery-pjax.
 
@@ -34,20 +35,20 @@ You may use only those components you want as long as you include
 their dependencies:
 
 ~~~
-| Component dependencies    |first|loader| qs |link|form|features|tables|app|jquery-pjax|
-|---------------------------|-----|------|----|----|----|--------|------|---|-----------|
-| 1. first-page-loader      | -   | .    | .  | .  | .  | .      | .    | . | .         |
-| 2. pjax-loader            | req | -    | .  | .  | .  | .      | .    | . | .         |
-| 3. pjax-qs                | .   | .    | -  | .  | .  | .      | .    | . | req       |
-| 4. pjax-link              | .   | .    | req| -  | .  | .      | .    | . | req       |
-| 5. pjax-form              | .   | .    | opt| opt| -  | .      | .    | . | req       |
-| 6. pjax-features          | .   | .    | .  | .  | .  | -      | .    | . | .         |
-| 7. pjax responsive-tables | .   | .    | .  | .  | .  | .      | -    | . | opt       |
-| 8. pjax-app               | .   | .    | req| req| req| .      | .    | - | req       |
+| Component dependencies    |first|loader| qs |link|form|features|tables|images|app|jquery-pjax|
+|---------------------------|-----|------|----|----|----|--------|------|------|---|-----------|
+| 1. first-page-loader      | -   | .    | .  | .  | .  | .      | .    | .    | . | .         |
+| 2. pjax-loader            | req | -    | .  | .  | .  | .      | .    | .    | . | .         |
+| 3. pjax-qs                | .   | .    | -  | .  | .  | .      | .    | .    | . | req       |
+| 4. pjax-link              | .   | .    | req| -  | .  | .      | .    | .    | . | req       |
+| 5. pjax-form              | .   | .    | opt| opt| -  | .      | .    | .    | . | req       |
+| 6. pjax-features          | .   | .    | .  | .  | .  | -      | .    | .    | . | .         |
+| 7. pjax responsive-tables | .   | .    | .  | .  | .  | .      | -    | .    | . | opt       |
+| 8. pjax responsive-images | .   | .    | .  | .  | .  | .      | .    | -    | . | opt       |
+| 9. pjax-app               | .   | .    | req| req| req| .      | .    | .    | - | req       |
 ~~~
 
-jquery-pjax-toolkit.js packages together modules 2 to 8.
-jquery-pjax-toolkit.min.js is the production version.
+jquery-pjax-toolkit.js packages together modules 2 to 9.
 
 
 
@@ -176,7 +177,7 @@ Valid numeric strings are converted to numbers.
 window.location.search = '?' + PJAX.qs.stringify(searchObj);
 window.location.hash = '#' + PJAX.qs.stringify(hashObj);
 ```
-The result contains the `hasOwnProperty(0` properties.
+The result contains the `hasOwnProperty()` properties.
 
 ```
 | option                | value| resulting format     |         |
@@ -445,6 +446,45 @@ Just add the `responsive` class to your `table` tags to make them responsive.
 Refer to Zurb's
 [responsive-tables] (http://zurb.com/playground/responsive-tables)
 for more information.
+
+
+***
+
+
+### <a name="pjax-responsive-images"></a>pjax-responsive-images
+This is [scottjehl/picturefill] (https://github.com/scottjehl/picturefill)
+with PJAX support. Please read the repo.
+
+#### 1. Download the appropriate image size
+```html
+<span data-picture data-alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+    <span data-src="/images/small.jpg"></span>
+    <span data-src="/images/medium.jpg"     data-media="(min-width: 400px)"></span>
+    <span data-src="/images/large.jpg"      data-media="(min-width: 800px)"></span>
+    <span data-src="/images/extralarge.jpg" data-media="(min-width: 1000px)"></span>
+
+    <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+    <noscript>
+        <img src="/images/small.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+    </noscript>
+</span>
+```
+
+#### 2. Server-side scaling/cropping tool
+Responsive images can be quite complicated to be served on your website
+if you have to: pre-scale them at many different resolutions;
+name them;
+and maybe change their size when developing a new release of your site.
+
+It's then a good practice to have a server-side picture scaling service
+(like pixtulate) to scale the images for you, just in time,
+starting from only one big image.
+
+If you want to use an image server, you can code your HTML like the following:
+```html
+<span data-src="http://demo.api.pixtulate.com/demo/large-2.jpg?w=512" data-media="(min-width: 400px)"></span>
+```
+Or you can save the resulting scaled images on your own server.
 
 
 ***
