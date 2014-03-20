@@ -20,6 +20,8 @@ bower install git://github.com/eddyystop/jquery-pjax-toolkit
 Support for responsive tables.
 - [pjax-responsive-images] (#pjax-responsive-images) -
 Support for responsive images.
+- [pjax-bind2Way] (#pjax-bind2Way) -
+Bidirectional binding between elements and JS objects.
 - [pjax-app] (#pjax-app) - Ties the above into a micro framework
 for jquery-pjax.
 
@@ -35,20 +37,21 @@ You may use only those components you want as long as you include
 their dependencies:
 
 ~~~
-| Component dependencies    |first|loader| qs |link|form|features|tables|images|app|jquery-pjax|
-|---------------------------|-----|------|----|----|----|--------|------|------|---|-----------|
-| 1. first-page-loader      | -   | .    | .  | .  | .  | .      | .    | .    | . | .         |
-| 2. pjax-loader            | req | -    | .  | .  | .  | .      | .    | .    | . | .         |
-| 3. pjax-qs                | .   | .    | -  | .  | .  | .      | .    | .    | . | req       |
-| 4. pjax-link              | .   | .    | req| -  | .  | .      | .    | .    | . | req       |
-| 5. pjax-form              | .   | .    | opt| opt| -  | .      | .    | .    | . | req       |
-| 6. pjax-features          | .   | .    | .  | .  | .  | -      | .    | .    | . | .         |
-| 7. pjax responsive-tables | .   | .    | .  | .  | .  | .      | -    | .    | . | opt       |
-| 8. pjax responsive-images | .   | .    | .  | .  | .  | .      | .    | -    | . | opt       |
-| 9. pjax-app               | .   | .    | req| req| req| .      | .    | .    | - | req       |
+| Component dependencies    |first|loader| qs |link|form|features|tables|images|bind2Way|app|jquery-pjax|
+|---------------------------|-----|------|----|----|----|--------|------|------|--------|---|-----------|
+| 1. first-page-loader      | -   | .    | .  | .  | .  | .      | .    | .    | .      | . | .         |
+| 2. pjax-loader            | req | -    | .  | .  | .  | .      | .    | .    | .      | . | .         |
+| 3. pjax-qs                | .   | .    | -  | .  | .  | .      | .    | .    | .      | . | req       |
+| 4. pjax-link              | .   | .    | req| -  | .  | .      | .    | .    | .      | . | req       |
+| 5. pjax-form              | .   | .    | opt| opt| -  | .      | .    | .    | .      | . | req       |
+| 6. pjax-features          | .   | .    | .  | .  | .  | -      | .    | .    | .      | . | .         |
+| 7. pjax-responsive-tables | .   | .    | .  | .  | .  | .      | -    | .    | .      | . | opt       |
+| 8. pjax-responsive-images | .   | .    | .  | .  | .  | .      | .    | -    | .      | . | opt       |
+| 9. pjax-bind2Way          | .   | .    | .  | .  | .  | .      | .    | .    | -      | . | .         |
+|10. pjax-app               | .   | .    | req| req| req| .      | .    | .    | .      | - | req       |
 ~~~
 
-jquery-pjax-toolkit.js packages together modules 2 to 9.
+jquery-pjax-toolkit.js packages together modules 2 to 10.
 
 
 
@@ -485,6 +488,74 @@ If you want to use an image server, you can code your HTML like the following:
 <span data-src="http://demo.api.pixtulate.com/demo/large-2.jpg?w=512" data-media="(min-width: 400px)"></span>
 ```
 Or you can save the resulting scaled images on your own server.
+
+
+***
+
+
+### <a name="pjax-bind2Way"></a>pjax-bind2Way
+Bidirectional binding between a DOM element and a JS object means:
+- The DOM value displayed changes whenever you change the JS value.
+- The JS value changes whenever the DOM value is changed,
+causing a 'change' event.
+- You can code a response to the tag changing via an optional callback.
+
+Binding makes for cleaner code and faster dev times.
+
+#### 1. Bind to an INPUT tag.
+```html
+<input type="text" id="name" name="name" value="Barbara">
+```
+```js
+var name = new PJAX.bind2Way.Value('#name');
+// name.value => 'Barbara'
+
+name.change('John');
+// document.getElementById('name') => 'John'
+// name.value => 'John'
+```
+`name` is bound with the `<input>` tag,
+and `name.value` is initialized to the tag's current value.
+You can change both the JS and displayed values with `name.change()`.
+`name.value` will be updated whenever the user changes the name.
+
+```js
+var name = new PJAX.bind2Way.Value('#name', function (value) {
+  // value, name.value => tag's new value
+});
+```
+The callback is called whenever the tag's value changes.
+
+```js
+var name = new PJAX.bind2Way.Value('#name', 'John', function (value) {});
+// document.getElementById('name') => 'John'
+// name.value => 'John'
+```
+The tag's value can be set during the binding.
+
+#### 2. Bind to a SELECT tag.
+```html
+<select id="club" name="club" multiple>
+  <option value="club0" selected>club0 name</option>
+  <option value="club2"         >club2 name</option>
+  <option value="club4" selected>club4 name</option>
+  </select>
+```
+```js
+var club = new PJAX.bind2Way.Select('#club');
+// club.value => ['club0', 'club4']
+
+club.change(['club0', 'club2']);
+// 'club 0 name' and 'club 2 name' are selected.
+// club.value => ['club0', 'club2']
+```
+`PJAX.bind2Way.Select` works like `PJAX.bind2Way.Value`.
+`club.value` is an array when more than one option is selected,
+a string when only one option.
+It can be set with either a string or an array.
+
+#### 2. Bind to radio buttons.
+Not yet implemented.
 
 
 ***
