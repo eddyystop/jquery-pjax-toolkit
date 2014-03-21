@@ -20,8 +20,8 @@ bower install git://github.com/eddyystop/jquery-pjax-toolkit
 Support for responsive tables.
 - [pjax-responsive-images] (#pjax-responsive-images) -
 Support for responsive images.
-- [pjax-bind2Way] (#pjax-bind2Way) -
-Bidirectional binding between elements and JS objects.
+- [pjax-CrazyGlue] (#pjax-CrazyGlue) -
+Bi-directional binding between this JS object and a DOM tag.
 - [pjax-app] (#pjax-app) - Ties the above into a micro framework
 for jquery-pjax.
 
@@ -37,18 +37,18 @@ You may use only those components you want as long as you include
 their dependencies:
 
 ~~~
-| Component dependencies    |first|loader| qs |link|form|features|tables|images|bind2Way|app|jquery-pjax|
-|---------------------------|-----|------|----|----|----|--------|------|------|--------|---|-----------|
-| 1. first-page-loader      | -   | .    | .  | .  | .  | .      | .    | .    | .      | . | .         |
-| 2. pjax-loader            | req | -    | .  | .  | .  | .      | .    | .    | .      | . | .         |
-| 3. pjax-qs                | .   | .    | -  | .  | .  | .      | .    | .    | .      | . | req       |
-| 4. pjax-link              | .   | .    | req| -  | .  | .      | .    | .    | .      | . | req       |
-| 5. pjax-form              | .   | .    | opt| opt| -  | .      | .    | .    | .      | . | req       |
-| 6. pjax-features          | .   | .    | .  | .  | .  | -      | .    | .    | .      | . | .         |
-| 7. pjax-responsive-tables | .   | .    | .  | .  | .  | .      | -    | .    | .      | . | opt       |
-| 8. pjax-responsive-images | .   | .    | .  | .  | .  | .      | .    | -    | .      | . | opt       |
-| 9. pjax-bind2Way          | .   | .    | .  | .  | .  | .      | .    | .    | -      | . | .         |
-|10. pjax-app               | .   | .    | req| req| req| .      | .    | .    | .      | - | req       |
+| Component dependencies    |first|loader| qs |link|form|features|tables|images|CrazyGlue|app|jquery-pjax|
+|---------------------------|-----|------|----|----|----|--------|------|------|---------|---|-----------|
+| 1. first-page-loader      | -   | .    | .  | .  | .  | .      | .    | .    | .       | . | .         |
+| 2. pjax-loader            | req | -    | .  | .  | .  | .      | .    | .    | .       | . | .         |
+| 3. pjax-qs                | .   | .    | -  | .  | .  | .      | .    | .    | .       | . | req       |
+| 4. pjax-link              | .   | .    | req| -  | .  | .      | .    | .    | .       | . | req       |
+| 5. pjax-form              | .   | .    | opt| opt| -  | .      | .    | .    | .       | . | req       |
+| 6. pjax-features          | .   | .    | .  | .  | .  | -      | .    | .    | .       | . | .         |
+| 7. pjax-responsive-tables | .   | .    | .  | .  | .  | .      | -    | .    | .       | . | opt       |
+| 8. pjax-responsive-images | .   | .    | .  | .  | .  | .      | .    | -    | .       | . | opt       |
+| 9. pjax-bind2Way          | .   | .    | .  | .  | .  | .      | .    | .    | -       | . | .         |
+|10. pjax-app               | .   | .    | req| req| req| .      | .    | .    | .       | - | req       |
 ~~~
 
 jquery-pjax-toolkit.js packages together modules 2 to 10.
@@ -493,69 +493,72 @@ Or you can save the resulting scaled images on your own server.
 ***
 
 
-### <a name="pjax-bind2Way"></a>pjax-bind2Way
-Bidirectional binding between a DOM element and a JS object means:
-- The DOM value displayed changes whenever you change the JS value.
-- The JS value changes whenever the DOM value is changed,
-causing a 'change' event.
-- You can code a response to the tag changing via an optional callback.
+### <a name="pjax-CrazyGlue"></a>pjax-CrazyGlue
+This contains the useful [CrazyGlue] (https://github.com/eddyystop/CrazyGlue).
 
-Binding makes for cleaner code and faster dev times.
+A light-weight, bi-directional binding of DOM tag values and JS objects.
+ - The tag value changes when you change the JS value.
+ - The JS value changes when the tag value changes.
+ - Callback for when the tag value changes.
 
-#### 1. Bind to an INPUT tag.
+See the repo for docs.
+
+#### 1. Bind to an INPUT tag (neither checkbox nor radio).
 ```html
-<input type="text" id="name" name="name" value="Barbara">
+<input type="text" id="the_name" value="Barbara">
 ```
 ```js
-var name = new PJAX.bind2Way.Value('#name');
-// name.value => 'Barbara'
-
-name.change('John');
-// document.getElementById('name') => 'John'
-// name.value => 'John'
-```
-`name` is bound with the `<input>` tag,
-and `name.value` is initialized to the tag's current value.
-You can change both the JS and displayed values with `name.change()`.
-`name.value` will be updated whenever the user changes the name.
-
-```js
-var name = new PJAX.bind2Way.Value('#name', function (value) {
+var name = new CrazyGlue('#the_name', 'Jessica', function (value) {
   // value, name.value => tag's new value
 });
-```
-The callback is called whenever the tag's value changes.
+// document.getElementById('the_name') => 'Jessica'
+// name.value => 'Jessica'
 
-```js
-var name = new PJAX.bind2Way.Value('#name', 'John', function (value) {});
-// document.getElementById('name') => 'John'
+name.change('John');
+// document.getElementById('the_name') => 'John'
 // name.value => 'John'
 ```
-The tag's value can be set during the binding.
 
 #### 2. Bind to a SELECT tag.
 ```html
-<select id="club" name="club" multiple>
+<select id="the_club" multiple>
   <option value="club0" selected>club0 name</option>
   <option value="club2"         >club2 name</option>
   <option value="club4" selected>club4 name</option>
-  </select>
+</select>
 ```
 ```js
-var club = new PJAX.bind2Way.Select('#club');
+var club = CrazyGlue('#the_club');
 // club.value => ['club0', 'club4']
 
 club.change(['club0', 'club2']);
-// 'club 0 name' and 'club 2 name' are selected.
+// 'club0 name' and 'club2 name' are selected.
 // club.value => ['club0', 'club2']
 ```
-`PJAX.bind2Way.Select` works like `PJAX.bind2Way.Value`.
-`club.value` is an array when more than one option is selected,
-a string when only one option.
-It can be set with either a string or an array.
 
-#### 2. Bind to radio buttons.
-Not yet implemented.
+#### 3. Bind to radio buttons.
+```html
+<input type="radio" name="sex" value="male">Male
+<input type="radio" name="sex" value="female">Female
+```
+```js
+var sex = new CrazyGlue('input:radio[name=sex]');
+// sex.value => []
+
+sex.change('male');
+```
+
+#### 4. Bind to checkbox.
+```html
+<input type="checkbox" name="animal" value="dog">Dog<br>
+<input type="checkbox" name="animal" value="cat" checked>Cat
+```
+```js
+var sex = new CrazyGlue('input:checkbox[name=animal]');
+// animal.value => ['cat']
+
+animal.change('dog');
+```
 
 
 ***
