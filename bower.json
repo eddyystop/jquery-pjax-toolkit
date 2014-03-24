@@ -1,12 +1,12 @@
 {
   "name": "jquery-pjax-toolkit",
-  "version": "0.2.0",
-  "homepage": "https://github.com/eddyystop/jquery-pjax-toolkit",
-  "authors": [
-    "JohnSz <johnsz9999@gmail.com>"
-  ],
   "description": "A toolkit for jquery-pjax. Useful utilities & a micro framework.",
+  "homepage": "https://github.com/eddyystop/jquery-pjax-toolkit",
   "main": "jquery-pjax-toolkit.js",
+  "version": "0.3.1",
+  "dependencies" : {
+    "jQuery": "1.10.0"
+  },
   "keywords": [
     "pjax",
     "jquery-pjax",
@@ -15,12 +15,15 @@
     "responsive table",
     "framework"
   ],
-  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
     "tests"
+  ],
+  "license": "MIT",
+  "authors": [
+    "JohnSz <johnsz9999@gmail.com>"
   ]
 }

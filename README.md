@@ -6,6 +6,8 @@ Related features are packaged in separate files, which you can use as needed.
 
 ## How to install
 ```sh
+bower install jquery-pjax-toolkit
+    or
 bower install git://github.com/eddyystop/jquery-pjax-toolkit
 ```
 
@@ -21,7 +23,7 @@ Support for responsive tables.
 - [pjax-responsive-images] (#pjax-responsive-images) -
 Support for responsive images.
 - [pjax-CrazyGlue] (#pjax-CrazyGlue) -
-Bi-directional binding between this JS object and a DOM tag.
+A light-weight, bi-directional binding of DOM tag values and JS objects.
 - [pjax-app] (#pjax-app) - Ties the above into a micro framework
 for jquery-pjax.
 
@@ -494,9 +496,8 @@ Or you can save the resulting scaled images on your own server.
 
 
 ### <a name="pjax-CrazyGlue"></a>pjax-CrazyGlue
-This contains the useful [CrazyGlue] (https://github.com/eddyystop/CrazyGlue).
-
-A light-weight, bi-directional binding of DOM tag values and JS objects.
+This contains the useful [CrazyGlue] (https://github.com/eddyystop/CrazyGlue),
+a light-weight, bi-directional binding of DOM tag values and JS objects.
  - The tag value changes when you change the JS value.
  - The JS value changes when the tag value changes.
  - Callback for when the tag value changes.
