@@ -15,7 +15,6 @@ var PJAX = PJAX || {};
   "use strict";
 
   w.picturefill = function() {
-    console.log('%%%%%%%% picturefill running');
     var ps = w.document.getElementsByTagName( "span" );
 
     // Loop the pictures

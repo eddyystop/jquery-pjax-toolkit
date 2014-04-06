@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="large-3 columns">
+        <label>Region</label>
+        <label><%= regionName %></label>
+        <br />
+        <label>Club</label>
+        <label><%= clubName %></label>
+    </div>
+    <div class="large-9 columns"></div>
+</div>
+
+<hr />
+
+<div id="teamWrapper">
+    <form id="ex1_teamForm" pjax-route="ex1_team_post" method="POST" data-abide="ajax">
+
+        <div class="row">
+            <div class="large-6 columns">
+                <div class="panel">
+                    <label>Choose the teams you want:</label>
+                    <select name="teams" multiple size="5" required>
+                        <option value="u16fd1">u16fd1</option>
+                        <option value="u16md1">u16md1</option>
+                        <option value="u14fd1">u14fd1</option>
+                        <option value="u14md1">u14md1</option>
+                    </select>
+                    <small class="error">You must select one or more teams.</small>
+                </div>
+            </div>
+            <div class="large-6"></div>
+        </div>
+
+        <hr/>
+        <input id="_button" name="_button" type="hidden">
+        <button id="submitButton" type="submit">Submit</button>
+    </form>
+</div>
+
+<br/>
+<h3>This is a responsive table:</h3>
+<table class="responsive">
+    <tbody >
+    <tr>
+        <th>Header 1</th>
+        <th>Header 2</th>
+        <th>Header 3</th>
+        <th>Header 4</th>
+        <th>Header 5</th>
+        <th>Header 6</th>
+        <th>Header 7</th>
+        <th>Header 8</th>
+    </tr>
+    <tr>
+        <td>row 1, cell 1</td>
+        <td>row 1, cell 2</td>
+        <td>row 1, cell 3</td>
+        <td>row 1, cell 4</td>
+        <td>row 1, cell 5</td>
+        <td>row 1, cell 6</td>
+        <td>row 1, cell 7</td>
+        <td>row 1, cell 8</td>
+    </tr>
+    <tr>
+        <td>row 2, cell 1</td>
+        <td>row 2, cell 2</td>
+        <td>row 2, cell 3</td>
+        <td>row 2, cell 4</td>
+        <td>row 2, cell 5</td>
+        <td>row 2, cell 6</td>
+        <td>row 2, cell 7</td>
+        <td>row 2, cell 8</td>
+    </tr>
+    <tr>
+        <td>row 3, cell 1</td>
+        <td>row 3, cell 2</td>
+        <td>row 3, cell 3</td>
+        <td>row 3, cell 4</td>
+        <td>row 3, cell 5</td>
+        <td>row 3, cell 6</td>
+        <td>row 3, cell 7</td>
+        <td>row 3, cell 8</td>
+    </tr>
+    <tr>
+        <td>row 4, cell 1</td>
+        <td>row 4, cell 2</td>
+        <td>row 4, cell 3</td>
+        <td>row 4, cell 4</td>
+        <td>row 4, cell 5</td>
+        <td>row 4, cell 6</td>
+        <td>row 4, cell 7</td>
+        <td>row 4, cell 8</td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+<h3>This is a responsive image:</h3>
+<span data-picture data-alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+    <span data-src="/img/picturefill/small.jpg"></span>
+    <span data-src="/img/picturefill/medium.jpg"     data-media="(min-width: 400px)"></span>
+    <span data-src="/img/picturefill/large.jpg"      data-media="(min-width: 800px)"></span>
+    <span data-src="/img/picturefill/extralarge.jpg" data-media="(min-width: 1000px)"></span>
+    <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+    <noscript>
+        <img src="/img/picturefill/small.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+    </noscript>
+</span>

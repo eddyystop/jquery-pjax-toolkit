@@ -70,13 +70,15 @@ CrazyGlue.prototype._getElValue = function () {
 };
 
 CrazyGlue.prototype._getElChecked = function () {
-  var val = this.$el.filter(':checked').val(),
-    type = typeof val;
+  var ret = [];
 
-  if (type === 'undefined' || type === 'null') { val = []; }
-  if (type === 'string') { val = [val]; }
+  this.$el.filter(':checked').each(function () {
+    var val = $(this).val(),
+      type = typeof val;
+    if (type === 'string') { ret.push(val); }
+  });
 
-  return val;
+  return ret;
 };
 
 CrazyGlue.prototype._getElSelected = function () {

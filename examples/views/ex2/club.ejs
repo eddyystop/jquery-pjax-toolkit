@@ -1,0 +1,136 @@
+<div id="clubWrapper">
+    <form id="signin_clubForm" pjax-route="signin_club_post" method="POST" data-abide="ajax">
+
+        <div class="row">
+            <div class="large-3 columns">
+                <label>Region</label>
+                <select id="region" name="region" size="5" required %>
+                    <% (regions || []).forEach(function (row) { %>
+                        <option value="<%= row[0] %>" <%= region === row[0] ? ' selected' : '' %>
+                                ><%= row[1] %></option>
+                    <% }); %>
+                </select>
+                <small class="error">You must select a region.</small>
+            </div>
+            <div class="large-3 columns">
+                <label>Club</label>
+                <select id="club" name ="club" multiple size="5" required>
+                    <% (clubs[region] || []).forEach(function (row) { %>
+                    <option value="<%= row[0] %>" <%= club === row[0] ? ' selected' : '' %>
+                            ><%= row[1] %></option>
+                    <% }); %>
+                </select>
+                <small class="error">You must select a club.</small>
+            </div>
+            <div class="large-3 columns">
+                <div>
+                    <label>Text field</label>
+                    <input type="text" id="input" name="input" value="some text">
+                </div>
+
+                <div>
+                    <input type="radio" name="sex" value="male">Male<br>
+                    <input type="radio" name="sex" value="female">Female<br>
+                </div>
+                <input type="text" id="gender" name="gender" disabled>
+                <div>
+                    <input type="checkbox" name="animal" value="dog">Dog<br>
+                    <input type="checkbox" name="animal" value="cat">Cat<br/>
+                </div>
+                <input type="text" id="zoo" name="zoo" disabled>
+            </div>
+            <div class="large-3 columns"></div>
+        </div>
+
+        <hr />
+        <input id="_button" name="_button" type="hidden">
+        <button type="submit" value="player">Player or parent</button>
+        <button type="submit" value="coach">Sign in as a coach</button>
+    </form>
+
+    <h3>Anchor links:</h3>
+    <a href="/ex1/screen1?field1=111&field2=222" pjax-anchor>This is a normal jquery-pjax link (<%= '<a href="/ex1/screen1?field1=111&field2=222" pjax-anchor>' %>)</a>
+    <br /><br />
+    <a pjax-route="screen1">This is a jquery-pjax-toolkit link (<%= '<a pjax-route="screen1">' %>)</a>
+</div>
+
+<br/>
+<h3>This is a responsive table:</h3>
+<table class="responsive">
+    <tbody >
+    <tr>
+        <th>Header 1</th>
+        <th>Header 2</th>
+        <th>Header 3</th>
+        <th>Header 4</th>
+        <th>Header 5</th>
+        <th>Header 6</th>
+        <th>Header 7</th>
+        <th>Header 8</th>
+    </tr>
+    <tr>
+        <td>row 1, cell 1</td>
+        <td>row 1, cell 2</td>
+        <td>row 1, cell 3</td>
+        <td>row 1, cell 4</td>
+        <td>row 1, cell 5</td>
+        <td>row 1, cell 6</td>
+        <td>row 1, cell 7</td>
+        <td>row 1, cell 8</td>
+    </tr>
+    <tr>
+        <td>row 2, cell 1</td>
+        <td>row 2, cell 2</td>
+        <td>row 2, cell 3</td>
+        <td>row 2, cell 4</td>
+        <td>row 2, cell 5</td>
+        <td>row 2, cell 6</td>
+        <td>row 2, cell 7</td>
+        <td>row 2, cell 8</td>
+    </tr>
+    <tr>
+        <td>row 3, cell 1</td>
+        <td>row 3, cell 2</td>
+        <td>row 3, cell 3</td>
+        <td>row 3, cell 4</td>
+        <td>row 3, cell 5</td>
+        <td>row 3, cell 6</td>
+        <td>row 3, cell 7</td>
+        <td>row 3, cell 8</td>
+    </tr>
+    <tr>
+        <td>row 4, cell 1</td>
+        <td>row 4, cell 2</td>
+        <td>row 4, cell 3</td>
+        <td>row 4, cell 4</td>
+        <td>row 4, cell 5</td>
+        <td>row 4, cell 6</td>
+        <td>row 4, cell 7</td>
+        <td>row 4, cell 8</td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+<h3>This is a responsive image:</h3>
+<span data-picture data-alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+    <span data-src="/img/picturefill/small.jpg"></span>
+    <span data-src="/img/picturefill/medium.jpg"     data-media="(min-width: 400px)"></span>
+    <span data-src="/img/picturefill/large.jpg"      data-media="(min-width: 800px)"></span>
+    <span data-src="/img/picturefill/extralarge.jpg" data-media="(min-width: 1000px)"></span>
+    <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+    <noscript>
+        <img src="/img/picturefill/small.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+    </noscript>
+</span>
+
+<script>
+    PJAX.data['ex1/club'] = {
+        regions: <%- JSON.stringify(regions) %>,
+        clubs: <%- JSON.stringify(clubs) %>
+    };
+    console.log('-> /ex1/club run-once js executing');
+</script>
+<script pjax-run-always>
+    console.log('-> /ex1/club run-always js executing');
+</script>

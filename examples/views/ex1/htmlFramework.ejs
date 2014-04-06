@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Soccer Practies</title>
+    <link rel="stylesheet" href="/css/normalize_and_foundation.css">
+    <link rel="stylesheet" href="/css/pjax-responsive-tables.css">
+</head>
+<body>
+<div id="nav" class="">
+    <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+            <li class="name">
+                <h1><a href="#"><strong>My Soccer Practices</strong></a></h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+        </ul>
+
+        <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="right">
+                <li class="active"><a href="#">About</a></li>
+                <li class="active"><a href="#">Contact us</a></li>
+                <li class="has-dropdown">
+                    <a href="#">Menu</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Sign out</a></li>
+                        <li><a href="#">Website</a></li>
+                        <li><a href="#">Option 3</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </nav>
+</div>
+
+<div id="pjax-container-main">
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js" type="text/javascript"></script>
+<script src="/js/vendor/jquery.pjax.js" type="text/javascript"></script>
+<script src="/js/vendor/modernizr.js" type="text/javascript"></script>
+<script src="/js/vendor/foundation.js" type="text/javascript"></script>
+<script src="/js/vendor/foundation.abide.js" type="text/javascript"></script>
+<script src="/js/vendor/jquery-pjax-toolkit.js" type="text/javascript"></script>
+<script src="/js/pjax-controllers.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).foundation();
+        alert('The page is being refreshed, assets reloaded.');
+        $.pjax({
+            url: PJAX.feature.addClientInfo('<%= htmlToLoad %>'),
+            container: '#pjax-container-main'
+        });
+    });
+</script>
+</body>
+</html>
