@@ -4,6 +4,20 @@ A toolkit for [jquery-pjax] (https://github.com/defunkt/jquery-pjax).
 Useful utilities & a micro framework.
 Related features are packaged in separate files, which you can use as needed.
 
+## Why use PJAX?
+From [Github's blog]
+ (https://github.com/blog/831-issues-2-0-the-next-generation).
+
+```
+PJAX: Next generation partial page loads
+
+Every link in Issues 2.0 works as you'd expect any link on the internet to work
+(open in a new tab, copy & pastable URL) — but you'll still get an insanely
+responsive interface (reminiscent of old-school AJAX interfaces).
+This is thanks to PJAX — something we've been using more and more
+throughout the site.
+```
+
 ## How to install
 ```sh
 bower install jquery-pjax-toolkit
