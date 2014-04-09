@@ -1,12 +1,12 @@
-# [jquery-pjax-toolkit] (https://github.com/defunkt/jquery-pjax-toolkit)
+# [jquery-pjax-toolkit] (https://github.com/eddyystop/jquery-pjax-toolkit)
 
 A toolkit for [jquery-pjax] (https://github.com/defunkt/jquery-pjax).
 Useful utilities & a micro framework.
 Related features are packaged in separate files, which you can use as needed.
 
 ## Why use PJAX?
-From [Github's blog]
- (https://github.com/blog/831-issues-2-0-the-next-generation).
+Github [likes and uses it]
+(https://github.com/blog/831-issues-2-0-the-next-generation).
 
 ```
 PJAX: Next generation partial page loads
@@ -40,14 +40,10 @@ Support for responsive images.
 A light-weight, bi-directional binding of DOM tag values and JS objects.
 - [pjax-app] (#pjax-app) - Ties the above into a micro framework
 for jquery-pjax.
-- [Examples] (#examples) - Examples of using all these components.
-The server is composed of Nodejs & Express 3.
-- [Example 1] (#examples1) - A basic PJAX server,
-showing how HTML fragments are swapped request, cached and recalled;
-how responsive tables and images work;
-how DOM elements can be bound to JS objects.
-- [Example 2] (#examples2) - Building on example 1,
-shows how to persist state for client pages.
+
+[jquery-pjax-node] (https://github.com/eddyystop/jquery-pjax-node)
+contains several runnable, increasingly complex mini-apps
+which guide you through using a Node server with jquery-pjax-toolkit.
 
 Note that jQuery itself removes constructs such as data and event handlers
 from elements before replacing those elements with new PJAX content.
@@ -767,58 +763,6 @@ PJAX.controllers['signin/club'] = function (action, options, path, containerId) 
 `<script>` is suited to configuring a controller for the session.
 `<script pjax-run-always>` is suited to passing data to be used while
 the current content is being displayed.
-
-
-***
-
-
-***
-
-
-### <a name="examples"></a>Examples
-There are several examples which build on one another.
-They illustrate increasingly more sophisticated ways
-of using jquery-pjax-toolkit.
-
-The examples are based on
-[sahat/hackathon-starter] (https://github.com/sahat/hackathon-starter)
-which provides a simple, easy-to-use boilerplate for servers
-based on Node.js and Express 3.
-It provides proven basic features
-and comes with oAuth 2.0 Authentication for a wide number of services.
-
-We have made some changes to hackathon-starter to make it easier to
-understand our examples:
-- We have removed all authentication.
-- We have removed csrf checking so example 1 remains straight forward.
-- We have removed MongoDB as we don't use a DB.
-- We have changed the render engine from jade to ejs.
-- We use Foundation 5 and Abide rather than Bootstrap,
-so we can illustrate simple client side validation even in example 1.
-
-Please read about the
-[prerequisites] (https://github.com/sahat/hackathon-starter/blob/master/README.md#prerequisites).
-Note we don't use MongoDB.
-
-You can start the server with:
-```
-# switch to the repo directory containing the Node.js examples.
-cd jquery-pjax-toolkit/examples
-
-# install dependencies (npm is installed with Node.js)
-npm install
-
-# start server
-node app.js
-
-# a message on the node console will say its listening to port 3000.
-```
-You can start the examples on the browser with:
-```
-localhost:3000/ex1
-or
-localhost:3000/ex2 (available soon)
-```
 
 
 ***
